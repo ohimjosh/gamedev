@@ -292,14 +292,15 @@ radius = 21.0
 height = 56.0
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+position = Vector2(453, 225)
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(172.5, 113.5)
+position = Vector2(-3, -22)
 scale = Vector2(3.0625, 3.0625)
 sprite_frames = SubResource("SpriteFrames_y0abg")
 animation = &"run_side"
 autoplay = "idle_front"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(174, 138)
+position = Vector2(-1, 2)
 shape = SubResource("CapsuleShape2D_dp1lt")

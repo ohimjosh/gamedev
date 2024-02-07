@@ -5,11 +5,13 @@ extends CharacterBody2D
 const speed = 400
 var current_dir = "none"
 
+# TODO
+# Create player movement in less lines
+
 func _physics_process(delta):
 	player_movement(delta)
 	
 func player_movement(delta):
-	
 	#right
 	if Input.is_action_pressed("right"):
 		current_dir = "right"
@@ -17,9 +19,6 @@ func player_movement(delta):
 		velocity.x = speed
 		velocity.y = 0
 		
-		
-	
-	
 	#left
 	elif Input.is_action_pressed("left"):
 		current_dir = "left"
@@ -27,10 +26,6 @@ func player_movement(delta):
 		velocity.x = -speed
 		velocity.y = 0
 		
-		
-		
-	
-	
 	#down
 	elif Input.is_action_pressed("down"):
 		current_dir = "down"
@@ -50,7 +45,6 @@ func player_movement(delta):
 		velocity.x = 0
 		velocity.y = 0
 		
-
 	move_and_slide()
 	
 func player_animation(movement):
@@ -68,8 +62,7 @@ func player_animation(movement):
 			sprite_2d.animation = "run_side"
 		elif movement == 0:
 			sprite_2d.animation = "idle_side"
-			
-			
+		
 	if dir == "up":
 		sprite_2d.flip_h = false
 		if movement == 1:
@@ -83,8 +76,4 @@ func player_animation(movement):
 			sprite_2d.animation = "run_front"
 		elif movement == 0:
 			sprite_2d.animation = "idle_front"
-	
-	
-	
-	
 	
