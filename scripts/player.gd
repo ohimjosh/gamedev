@@ -77,3 +77,5 @@ func player_animation(movement):
 		elif movement == 0:
 			sprite_2d.animation = "idle_front"
 	
+func player_shop_method():
+	pass

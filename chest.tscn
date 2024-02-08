@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=3 uid="uid://b8dxn0j8b5s2m"]
+
+[ext_resource type="Texture2D" uid="uid://cyo7e6av5dftt" path="res://assets/chest_01.png" id="2_7hafe"]
+
+[sub_resource type="GDScript" id="GDScript_268jm"]
+script/source = "extends Area2D
+@onready var sprite = $AnimatedSprite2D
+
+
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbn00"]
+atlas = ExtResource("2_7hafe")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvcgg"]
+atlas = ExtResource("2_7hafe")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_14kte"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jbn00")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jvcgg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_7n6px"]
+script/source = "extends Area2D
+class_name InteractionArea
+
+@export var action_name: String = \"interact\"
+
+var interact: Callable = func():
+	pass
+
+
+func _on_body_entered(body):
+	InteractionManager.register_area(self)
+
+
+func _on_body_exited(body):
+	InteractionManager.unregister_area(self)
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_frwlq"]
+size = Vector2(130, 104.5)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t0uss"]
+radius = 22.0
+height = 44.0
+
+[node name="chest" type="Area2D"]
+position = Vector2(511, 202)
+script = SubResource("GDScript_268jm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-0.999999, -1.19209e-06)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_14kte")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+script = SubResource("GDScript_7n6px")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_frwlq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_t0uss")

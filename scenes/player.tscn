@@ -288,19 +288,22 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dp1lt"]
-radius = 21.0
-height = 56.0
+radius = 15.0
+height = 44.0
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
-position = Vector2(453, 225)
+position = Vector2(25, 9)
+metadata/_edit_vertical_guides_ = [48.0, 0.0]
+metadata/_edit_horizontal_guides_ = [48.0, 0.0]
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-3, -22)
-scale = Vector2(3.0625, 3.0625)
+scale = Vector2(2.04948, 2.04948)
 sprite_frames = SubResource("SpriteFrames_y0abg")
 animation = &"run_side"
 autoplay = "idle_front"
+frame = 3
+frame_progress = 0.544045
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 2)
+position = Vector2(1, 15)
 shape = SubResource("CapsuleShape2D_dp1lt")
