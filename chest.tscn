@@ -1,76 +1,47 @@
-[gd_scene load_steps=9 format=3 uid="uid://b8dxn0j8b5s2m"]
+[gd_scene load_steps=7 format=3 uid="uid://b8dxn0j8b5s2m"]
 
-[ext_resource type="Texture2D" uid="uid://cyo7e6av5dftt" path="res://assets/chest_01.png" id="2_7hafe"]
+[ext_resource type="Script" path="res://scenes/chest.gd" id="1_u0fx5"]
+[ext_resource type="Texture2D" uid="uid://cyo7e6av5dftt" path="res://assets/chest_01.png" id="2_7b7m8"]
 
-[sub_resource type="GDScript" id="GDScript_268jm"]
-script/source = "extends Area2D
-@onready var sprite = $AnimatedSprite2D
-
-
-"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jbn00"]
-atlas = ExtResource("2_7hafe")
+[sub_resource type="AtlasTexture" id="AtlasTexture_ca364"]
+atlas = ExtResource("2_7b7m8")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jvcgg"]
-atlas = ExtResource("2_7hafe")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_14kte"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_c7h2c"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jbn00")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jvcgg")
+"texture": SubResource("AtlasTexture_ca364")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
-[sub_resource type="GDScript" id="GDScript_7n6px"]
-script/source = "extends Area2D
-class_name InteractionArea
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6srib"]
+size = Vector2(42, 39)
 
-@export var action_name: String = \"interact\"
+[sub_resource type="CircleShape2D" id="CircleShape2D_c0wl6"]
+radius = 67.1863
 
-var interact: Callable = func():
-	pass
+[node name="chest" type="StaticBody2D"]
+position = Vector2(442, 103)
+script = ExtResource("1_u0fx5")
 
-
-func _on_body_entered(body):
-	InteractionManager.register_area(self)
-
-
-func _on_body_exited(body):
-	InteractionManager.unregister_area(self)
-"
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_frwlq"]
-size = Vector2(130, 104.5)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t0uss"]
-radius = 22.0
-height = 44.0
-
-[node name="chest" type="Area2D"]
-position = Vector2(511, 202)
-script = SubResource("GDScript_268jm")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-0.999999, -1.19209e-06)
+[node name="closed" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
-sprite_frames = SubResource("SpriteFrames_14kte")
-
-[node name="InteractionArea" type="Area2D" parent="."]
-script = SubResource("GDScript_7n6px")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
-position = Vector2(0, 1)
-shape = SubResource("RectangleShape2D_frwlq")
+sprite_frames = SubResource("SpriteFrames_c7h2c")
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_t0uss")
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_6srib")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 31)
+shape = SubResource("CircleShape2D_c0wl6")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

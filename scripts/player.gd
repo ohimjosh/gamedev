@@ -1,12 +1,14 @@
 extends CharacterBody2D
 @onready var sprite_2d = $Sprite2D
 
-
 const speed = 400
 var current_dir = "none"
+var canPick = true
+
 
 # TODO
 # Create player movement in less lines
+
 
 func _physics_process(delta):
 	player_movement(delta)
@@ -18,6 +20,7 @@ func player_movement(delta):
 		player_animation(1)
 		velocity.x = speed
 		velocity.y = 0
+		
 		
 	#left
 	elif Input.is_action_pressed("left"):
@@ -76,6 +79,3 @@ func player_animation(movement):
 			sprite_2d.animation = "run_front"
 		elif movement == 0:
 			sprite_2d.animation = "idle_front"
-	
-func player_shop_method():
-	pass

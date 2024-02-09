@@ -1,11 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://c4mrnyhpj7wh7"]
+[gd_scene load_steps=9 format=3 uid="uid://c4mrnyhpj7wh7"]
 
 [ext_resource type="Texture2D" uid="uid://18klsy2dtjl7" path="res://assets/Gray.png" id="1_3sq07"]
 [ext_resource type="Texture2D" uid="uid://165n8s826ksb" path="res://assets/Terrain (16x16).png" id="2_xyrdx"]
-[ext_resource type="Script" path="res://scenes/chest.gd" id="5_8wiv1"]
+[ext_resource type="PackedScene" uid="uid://b8dxn0j8b5s2m" path="res://chest.tscn" id="5_067nb"]
 [ext_resource type="PackedScene" uid="uid://cuc347i5e430f" path="res://scenes/player.tscn" id="5_ebpkk"]
-[ext_resource type="Texture2D" uid="uid://cyo7e6av5dftt" path="res://assets/chest_01.png" id="5_lxtt7"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="6_ivoaj"]
+[ext_resource type="PackedScene" uid="uid://m0lllwsmkalj" path="res://bomb.tscn" id="6_t2tkh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tj1k5"]
 texture = ExtResource("2_xyrdx")
@@ -456,27 +456,6 @@ texture = ExtResource("2_xyrdx")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_tj1k5")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ca364"]
-atlas = ExtResource("5_lxtt7")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_c7h2c"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ca364")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6srib"]
-size = Vector2(42, 39)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_c0wl6"]
-radius = 67.1863
-
 [node name="Node" type="Node"]
 metadata/_edit_vertical_guides_ = [0.0, 48.0]
 metadata/_edit_horizontal_guides_ = [0.0, 48.0]
@@ -502,24 +481,8 @@ layer_0/tile_data = PackedInt32Array(917503, 65536, 9, 851967, 65536, 9, 786431,
 position = Vector2(135, 22)
 script = ExtResource("6_ivoaj")
 
-[node name="chest" type="StaticBody2D" parent="."]
-position = Vector2(442, 103)
-script = ExtResource("5_8wiv1")
+[node name="chest" parent="." instance=ExtResource("5_067nb")]
 
-[node name="closed" type="AnimatedSprite2D" parent="chest"]
-scale = Vector2(3, 3)
-sprite_frames = SubResource("SpriteFrames_c7h2c")
-autoplay = "default"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="chest"]
-position = Vector2(0, -1.5)
-shape = SubResource("RectangleShape2D_6srib")
-
-[node name="Area2D" type="Area2D" parent="chest"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="chest/Area2D"]
-position = Vector2(0, 31)
-shape = SubResource("CircleShape2D_c0wl6")
-
-[connection signal="body_entered" from="chest/Area2D" to="chest" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="chest/Area2D" to="chest" method="_on_area_2d_body_exited"]
+[node name="bomb" parent="." instance=ExtResource("6_t2tkh")]
+position = Vector2(207, 161)
+input_pickable = false
