@@ -26,7 +26,7 @@ radius = 45.4153
 
 [node name="bomb" type="RigidBody2D"]
 position = Vector2(99, 99)
-collision_layer = 0
+collision_layer = 2
 input_pickable = true
 script = ExtResource("1_0jjte")
 

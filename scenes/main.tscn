@@ -453,7 +453,8 @@ texture = ExtResource("2_xyrdx")
 20:10/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_iwrnm"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_tj1k5")
 
 [node name="Node" type="Node"]
@@ -479,10 +480,12 @@ layer_0/tile_data = PackedInt32Array(917503, 65536, 9, 851967, 65536, 9, 786431,
 
 [node name="player" parent="." instance=ExtResource("5_ebpkk")]
 position = Vector2(135, 22)
+collision_layer = 1
 script = ExtResource("6_ivoaj")
 
 [node name="chest" parent="." instance=ExtResource("5_067nb")]
 
 [node name="bomb" parent="." instance=ExtResource("6_t2tkh")]
 position = Vector2(207, 161)
+collision_mask = 2
 input_pickable = false

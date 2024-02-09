@@ -6,7 +6,7 @@ var picked = false
 
 func _physics_process(delta):
 	if picked == true:
-		self.position = get_node("../player/Marker2D").global_position
+		bomb.position = get_node("../player/Marker2D").global_position
 	
 	
 func _input(event):
@@ -23,16 +23,16 @@ func _input(event):
 		picked = false
 		get_node("../player").canPick = true
 		if get_node("../player/Sprite2D").flip_h == false:
-			apply_impulse(Vector2(), Vector2(90, -10))
+			apply_impulse(Vector2(), Vector2(20, -5))
 		else:
-			apply_impulse(Vector2(), Vector2(-90, -10))
+			apply_impulse(Vector2(), Vector2(-20, -5))
 			
 
 	if Input.is_action_just_pressed("ui_cancel") and picked == true:
 		picked = false
 		get_node("../player").canPick = true
 		if get_node("../player").sprite_2d.flip_h == false:
-			apply_impulse(Vector2(), Vector2(150, -200))
+			apply_impulse(Vector2(), Vector2(90, -60))
 		else:
-			apply_impulse(Vector2(), Vector2(-150, -200))
+			apply_impulse(Vector2(), Vector2(-90, -60))
 
